@@ -1,6 +1,5 @@
 package com.suitmedia.screeningtest.di
 
-import android.app.Application
 import com.google.gson.GsonBuilder
 import com.suitmedia.screeningtest.BuildConfig
 import com.suitmedia.screeningtest.api.AppService

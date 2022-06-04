@@ -1,6 +1,7 @@
 package com.suitmedia.screeningtest.di
 
 import android.app.Application
+import com.suitmedia.screeningtest.di.component.MainActivityModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -11,6 +12,7 @@ import javax.inject.Singleton
     modules = [
         AndroidInjectionModule::class,
         AppModule::class,
+        MainActivityModule::class
     ]
 )
 interface AppComponent {
