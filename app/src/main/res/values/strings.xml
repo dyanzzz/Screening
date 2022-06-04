@@ -1,3 +1,10 @@
 <resources>
     <string name="dashboard">Dashboard</string>
+    <string name="welcome">Welcome</string>
+    <string name="description">This is app for suitmedia mobile developer test</string>
+    <string name="next">Next</string>
+    <string name="check">Check</string>
+    <string name="type_name">Type name here…</string>
+    <string name="type_text_palindrome">Type text palindrome</string>
+    <string name="copyright">"Copyright © 2020 Suitmedia All Rights Reserved."</string>
 </resources>

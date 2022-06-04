@@ -9,14 +9,15 @@ import com.suitmedia.screeningtest.databinding.FragmentHomeBinding
 import com.suitmedia.screeningtest.di.Injectable
 
 class HomeFragment: Fragment(), Injectable {
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         context ?: return binding.root
 
         return binding.root
