@@ -8,4 +8,7 @@
     <string name="type_text_palindrome">Type text palindrome</string>
     <string name="copyright">"Copyright © 2020 Suitmedia All Rights Reserved."</string>
     <string name="internal_storage">Internal Storage</string>
+    <string name="hallo">Hallo,</string>
+    <string name="choose_event">Choose Event</string>
+    <string name="choose_guest">Choose Guest</string>
 </resources>

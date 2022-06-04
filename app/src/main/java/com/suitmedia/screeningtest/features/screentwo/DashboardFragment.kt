@@ -25,7 +25,7 @@ class DashboardFragment: Fragment(), Injectable {
         context ?: return binding.root
 
         val argsProfileEntity  = args.profileEntity
-        binding.textView.text = argsProfileEntity?.name
+        binding.name.text = "${argsProfileEntity?.name}!"
 
         Timber.e(argsProfileEntity.toString())
 
