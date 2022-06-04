@@ -110,13 +110,12 @@ dependencies {
 
     // Dagger
     def daggerVersion = '2.23.2'
-    def daggerAndroidSupportVersion = '2.25.2'
     def daggerAndroidVersion = '2.35.1'
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
     kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     implementation "com.google.dagger:dagger:$daggerAndroidVersion"
     implementation "com.google.dagger:dagger-android:$daggerAndroidVersion"
-    implementation "com.google.dagger:dagger-android-support:$daggerAndroidSupportVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
 
     // coroutine
     def coroutine = '1.5.0'
