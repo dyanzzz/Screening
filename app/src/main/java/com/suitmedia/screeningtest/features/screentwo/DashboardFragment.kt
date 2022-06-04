@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.suitmedia.screeningtest.databinding.FragmentDashboardBinding
 import com.suitmedia.screeningtest.di.Injectable
@@ -25,7 +26,15 @@ class DashboardFragment: Fragment(), Injectable {
         context ?: return binding.root
 
         val argsProfileEntity  = args.profileEntity
-        binding.textView.text = argsProfileEntity?.name
+
+        binding.apply {
+            name.text = "${argsProfileEntity?.name}!"
+
+            chooseEvent.setOnClickListener {
+                val direction = DashboardFragmentDirections.actionNavigationDashboardToNavigationEvent()
+                it.findNavController().navigate(direction)
+            }
+        }
 
         Timber.e(argsProfileEntity.toString())
 

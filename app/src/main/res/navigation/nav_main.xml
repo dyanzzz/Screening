@@ -29,6 +29,16 @@
             app:argType="com.suitmedia.screeningtest.features.screenone.ProfileEntity"
             app:nullable="true" />
 
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_event"
+            app:destination="@id/navigation_event" />
+
     </fragment>
+
+    <fragment
+        android:id="@+id/navigation_event"
+        android:name="com.suitmedia.screeningtest.features.screenthree.EventFragment"
+        android:label="@string/choose_event"
+        tools:layout="@layout/fragment_event" />
 
 </navigation>
