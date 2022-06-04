@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/grey_10"
     android:theme="@style/AppTheme.Material">
 
@@ -70,13 +71,13 @@
                     app:civ_border_width="2dp"/>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/name"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/type_name">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -87,17 +88,27 @@
                     android:layout_height="@dimen/spacing_mlarge" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/palindrome"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/type_text_palindrome">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/palindrome"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/result_palindrome"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    style="@style/TextAppearance.Medium.Bold"
+                    android:textAlignment="center"
+                    tools:text="@string/dashboard"
+                    android:visibility="invisible"/>
 
                 <View
                     android:layout_width="0dp"
@@ -111,7 +122,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/next"
+                        android:id="@+id/next_screen"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
                         android:layout_weight="4"
@@ -128,7 +139,7 @@
                         android:layout_height="0dp" />
 
                     <Button
-                        android:id="@+id/check"
+                        android:id="@+id/check_palindrome"
                         android:layout_width="0dp"
                         android:layout_height="55dp"
                         android:layout_weight="2"

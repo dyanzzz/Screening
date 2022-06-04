@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
@@ -20,6 +21,7 @@ import com.suitmedia.screeningtest.R
 import com.suitmedia.screeningtest.databinding.FragmentHomeBinding
 import com.suitmedia.screeningtest.di.Injectable
 import com.suitmedia.screeningtest.utils.SnackBarCustom
+import com.suitmedia.screeningtest.utils.Tools.hideKeyboard
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 
@@ -38,11 +40,36 @@ class HomeFragment: Fragment(), Injectable {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         context ?: return binding.root
 
-        binding.profileImage.setOnClickListener {
-            requestPermission()
-            if (permissionGranted) {
-                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(cameraIntent, _pictureId)
+        binding.apply {
+            profileImage.setOnClickListener {
+                requestPermission()
+                if (permissionGranted) {
+                    val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(cameraIntent, _pictureId)
+                }
+            }
+
+            checkPalindrome.setOnClickListener {
+                hideKeyboard()
+                val textPalindrome = palindrome.text
+                if(textPalindrome.isNullOrEmpty()) {
+                    SnackBarCustom.snackBarIconInfo(root, layoutInflater, resources, root.context, "PLease Input Text to Check Palindrome", R.drawable.ic_close, R.color.red_500)
+                    palindrome.requestFocus()
+                } else {
+                    resultPalindrome.visibility = View.VISIBLE
+                    var reverseString = ""
+                    val textLength = textPalindrome.toString().length
+
+                    for (i in (textLength - 1) downTo 0) {
+                        reverseString += textPalindrome[i]
+                    }
+
+                    if (textPalindrome.toString() == reverseString) {
+                        resultPalindrome.text = "sentences is palindrome"
+                    } else {
+                        resultPalindrome.text = "not from input text palindrome"
+                    }
+                }
             }
         }
 
