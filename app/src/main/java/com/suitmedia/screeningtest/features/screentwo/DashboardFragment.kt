@@ -23,6 +23,7 @@ class DashboardFragment: Fragment(), Injectable {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: EventViewModel
+    private var eventName = ""
 
     private val args :DashboardFragmentArgs by navArgs()
 
@@ -43,12 +44,19 @@ class DashboardFragment: Fragment(), Injectable {
 
             setFragmentResultListener(EventFragment.EVENT){ _, resultEventName ->
                 resultEventName.getString(EventFragment.EVENT_NAME).let { event ->
-                    chooseEvent.text = "Choose Event ${event.toString()}"
+                    eventName = "Choose Event ${event.toString()}"
+                    chooseEvent.text = eventName
                 }
             }
+            if(eventName.isNotEmpty()) chooseEvent.text = eventName
 
             chooseEvent.setOnClickListener {
                 val direction = DashboardFragmentDirections.actionNavigationDashboardToNavigationEvent()
+                it.findNavController().navigate(direction)
+            }
+
+            chooseGuest.setOnClickListener {
+                val direction = DashboardFragmentDirections.actionNavigationDashboardToNavigationGuest()
                 it.findNavController().navigate(direction)
             }
         }
