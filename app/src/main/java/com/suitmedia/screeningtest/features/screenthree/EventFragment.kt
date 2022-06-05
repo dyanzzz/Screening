@@ -3,7 +3,9 @@ package com.suitmedia.screeningtest.features.screenthree
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,6 +25,11 @@ class EventFragment: Fragment(), Injectable {
     private lateinit var toolbarBinding: ToolbarBinding
     private lateinit var viewModel: EventViewModel
     private lateinit var adapter: EventAdapter
+
+    companion object {
+        const val EVENT = "event"
+        const val EVENT_NAME = "event_name"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,7 +70,12 @@ class EventFragment: Fragment(), Injectable {
 
         adapter.setEventCallback(object : EventCallback{
             override fun onItemClicked(data: EventEntity) {
-                Toast.makeText(activity, data.title, Toast.LENGTH_LONG).show()
+                setFragmentResult(
+                    EVENT, bundleOf(
+                        EVENT_NAME to data.title
+                    )
+                )
+                findNavController().popBackStack()
             }
         })
 

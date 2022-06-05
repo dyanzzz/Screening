@@ -2,10 +2,8 @@ package com.suitmedia.screeningtest.features.screenone
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -19,9 +17,6 @@ import androidx.core.content.PermissionChecker
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.suitmedia.screeningtest.R
 import com.suitmedia.screeningtest.databinding.FragmentHomeBinding
 import com.suitmedia.screeningtest.di.Injectable
@@ -29,7 +24,6 @@ import com.suitmedia.screeningtest.utils.CameraUtil
 import com.suitmedia.screeningtest.utils.SnackBarCustom
 import com.suitmedia.screeningtest.utils.Tools.hideKeyboard
 import timber.log.Timber
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 
@@ -43,7 +37,7 @@ class HomeFragment: Fragment(), Injectable {
     private var filePath: String = ""
     private var tvName: String = ""
     private var tvPalindrome: String = ""
-    private lateinit var capturePhotoEntity: ProfileEntity
+    private lateinit var profileEntity: ProfileEntity
     private var isPalindrome = false
 
     override fun onCreateView(
@@ -102,10 +96,10 @@ class HomeFragment: Fragment(), Injectable {
                 } else {
                     checkPalindrome()
                     if(isPalindrome) {
-                        capturePhotoEntity = ProfileEntity(tvName, fileName, filePath)
+                        profileEntity = ProfileEntity(tvName, fileName, filePath)
                         val direction =
                             HomeFragmentDirections.actionNavigationHomeToNavigationDashboard(
-                                capturePhotoEntity
+                                profileEntity
                             )
                         it.findNavController().navigate(direction)
                     }
