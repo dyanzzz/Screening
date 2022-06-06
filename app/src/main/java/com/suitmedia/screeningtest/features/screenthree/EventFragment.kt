@@ -7,6 +7,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suitmedia.screeningtest.R
@@ -51,13 +52,13 @@ class EventFragment: Fragment(), Injectable {
         val toolbar = toolbarBinding.toolbar
         toolbar.setNavigationIcon(R.drawable.ic_back_white)
 
-        setToolbar(toolbar, "Event")
+        setToolbar(toolbar, "Events")
     }
 
     private fun initComponent() {
-        viewModel.setListEvent()
         adapter = EventAdapter()
         adapter.notifyDataSetChanged()
+        viewModel.setListEvent()
 
         binding.apply {
             rv.setHasFixedSize(true)
