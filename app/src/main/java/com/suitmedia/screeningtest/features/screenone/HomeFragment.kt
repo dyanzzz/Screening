@@ -96,7 +96,7 @@ class HomeFragment: Fragment(), Injectable {
                 } else {
                     checkPalindrome()
                     if(isPalindrome) {
-                        profileEntity = ProfileEntity(tvName, fileName, filePath)
+                        profileEntity = ProfileEntity(0, tvName, "fistName", "lastName", "email", "avatar", fileName, filePath)
                         val direction =
                             HomeFragmentDirections.actionNavigationHomeToNavigationDashboard(
                                 profileEntity

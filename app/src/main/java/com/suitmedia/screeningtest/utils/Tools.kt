@@ -1,14 +1,20 @@
 package com.suitmedia.screeningtest.utils
 
 import android.app.Activity
-import android.content.*
+import android.content.Context
 import android.os.Build
+import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.suitmedia.screeningtest.R
 
 object Tools {
@@ -48,6 +54,24 @@ object Tools {
             val window = act.window
             window.statusBarColor = ContextCompat.getColor(act, R.color.colorPrimaryDark)
         }
+    }
+
+    fun dpToPx(c: Context, dp: Int): Int {
+        val r = c.resources
+        return Math.round(
+            TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dp.toFloat(),
+                r.displayMetrics
+            )
+        )
+    }
+
+    fun displayImageOriginal(ctx: Context, img: ImageView, @DrawableRes drawable: Int) {
+        Glide.with(ctx).load(drawable)
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .into(img)
     }
 
 }

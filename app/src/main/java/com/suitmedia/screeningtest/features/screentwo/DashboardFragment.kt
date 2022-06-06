@@ -27,6 +27,12 @@ class DashboardFragment: Fragment(), Injectable {
 
     private val args :DashboardFragmentArgs by navArgs()
 
+    companion object {
+        const val RETURN_VALUE = "return"
+        const val FULL_NAME = "full_name"
+        const val EVENT_NAME = "event_name"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,10 +48,17 @@ class DashboardFragment: Fragment(), Injectable {
         binding.apply {
             name.text = "${argsProfileEntity?.name}!"
 
-            setFragmentResultListener(EventFragment.EVENT){ _, resultEventName ->
-                resultEventName.getString(EventFragment.EVENT_NAME).let { event ->
-                    eventName = "Choose Event ${event.toString()}"
-                    chooseEvent.text = eventName
+            setFragmentResultListener(RETURN_VALUE){ _, result ->
+                result.getString(EVENT_NAME)?.let { event ->
+                    if (event.isNotEmpty()) {
+                        eventName = "Choose Event ${event.toString()}"
+                        chooseEvent.text = eventName
+                    }
+                }
+                result.getString(FULL_NAME)?.let { guestName ->
+                    if (guestName.isNotEmpty()) {
+                        name.text = guestName
+                    }
                 }
             }
             if(eventName.isNotEmpty()) chooseEvent.text = eventName
@@ -56,7 +69,7 @@ class DashboardFragment: Fragment(), Injectable {
             }
 
             chooseGuest.setOnClickListener {
-                val direction = DashboardFragmentDirections.actionNavigationDashboardToNavigationGuest()
+                val direction = DashboardFragmentDirections.actionNavigationDashboardToNavigationGuest(argsProfileEntity)
                 it.findNavController().navigate(direction)
             }
         }

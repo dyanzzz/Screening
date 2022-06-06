@@ -48,6 +48,13 @@
         android:id="@+id/navigation_guest"
         android:name="com.suitmedia.screeningtest.features.screenfour.GuestFragment"
         android:label="@string/choose_guest"
-        tools:layout="@layout/fragment_guest" />
+        tools:layout="@layout/fragment_guest" >
+
+        <argument
+            android:name="profileEntity"
+            android:defaultValue="@null"
+            app:argType="com.suitmedia.screeningtest.features.screenone.ProfileEntity"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

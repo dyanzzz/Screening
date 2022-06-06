@@ -14,6 +14,8 @@ import com.suitmedia.screeningtest.databinding.FragmentEventBinding
 import com.suitmedia.screeningtest.databinding.ToolbarBinding
 import com.suitmedia.screeningtest.di.Injectable
 import com.suitmedia.screeningtest.di.injectViewModel
+import com.suitmedia.screeningtest.features.screentwo.DashboardFragment.Companion.EVENT_NAME
+import com.suitmedia.screeningtest.features.screentwo.DashboardFragment.Companion.RETURN_VALUE
 import com.suitmedia.screeningtest.ui.setToolbar
 import javax.inject.Inject
 
@@ -25,11 +27,6 @@ class EventFragment: Fragment(), Injectable {
     private lateinit var toolbarBinding: ToolbarBinding
     private lateinit var viewModel: EventViewModel
     private lateinit var adapter: EventAdapter
-
-    companion object {
-        const val EVENT = "event"
-        const val EVENT_NAME = "event_name"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,7 +68,7 @@ class EventFragment: Fragment(), Injectable {
         adapter.setEventCallback(object : EventCallback{
             override fun onItemClicked(data: EventEntity) {
                 setFragmentResult(
-                    EVENT, bundleOf(
+                    RETURN_VALUE, bundleOf(
                         EVENT_NAME to data.title
                     )
                 )
