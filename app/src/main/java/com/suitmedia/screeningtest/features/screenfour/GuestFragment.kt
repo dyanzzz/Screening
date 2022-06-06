@@ -9,6 +9,8 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.suitmedia.screeningtest.R
 import com.suitmedia.screeningtest.data.Result
 import com.suitmedia.screeningtest.databinding.FragmentGuestBinding
@@ -34,9 +36,11 @@ class GuestFragment: Fragment(), Injectable {
     private lateinit var toolbarBinding: ToolbarBinding
     private lateinit var viewModel: GuestViewModel
     private lateinit var adapter: GuestAdapter
+    private lateinit var layoutManager: LinearLayoutManager
     private var limit: Int = 10
     private var page: Int = 1
     private var totalPage: Int = 1
+    private var isLoading = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,13 +90,47 @@ class GuestFragment: Fragment(), Injectable {
         }
 
         binding.apply {
-            rv.layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            rv.layoutManager = layoutManager
             rv.addItemDecoration(SpacingItemDecoration(2, Tools.dpToPx(requireContext(), 3), true))
             rv.setHasFixedSize(true)
 
             rv.adapter = adapter
 
-            //getListGuest()
+            rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+
+                    val visibleItemCount = layoutManager.childCount
+                    val pastVisibleItem = layoutManager.findFirstVisibleItemPosition()
+                    val total  = adapter.itemCount
+
+                    if (!isLoading && page < totalPage){
+                        if (visibleItemCount + pastVisibleItem >= total){
+                            page++
+
+                            viewModel.setListGuest(page, limit)
+                            getListGuest()
+                        }
+                    }
+
+                }
+            })
+
+            swipe.setOnRefreshListener {
+                swipe.isRefreshing= true
+                page = 1
+
+                try {
+                    adapter.clear()
+
+                    viewModel.setListGuest(page, limit)
+                    swipe.isRefreshing= false
+                } catch (e: Exception){
+                    Timber.e("Error setList : $e")
+                    Toast.makeText(requireContext(), "Error : $e", Toast.LENGTH_LONG).show()
+                }
+            }
         }
 
         adapter.setGuestCallback(object : GuestCallback {
@@ -111,6 +149,7 @@ class GuestFragment: Fragment(), Injectable {
     private fun getListGuest(){
         binding.apply {
             try {
+                isLoading = true
                 viewModel.getListGuestItem.observeEvent(viewLifecycleOwner) { resultObserve ->
                     resultObserve.observe(viewLifecycleOwner) { result ->
                         if (result != null) {
@@ -121,11 +160,13 @@ class GuestFragment: Fragment(), Injectable {
                                 }
                                 Result.Status.SUCCESS -> {
                                     progressbar.visibility = View.GONE
-                                    val listResponse = result.data?.data
-
-                                    adapter.setList(listResponse)
+                                    val response = result.data
+                                    totalPage = response!!.totalPage
+                                    adapter.setList(response.data)
+                                    isLoading = false
                                 }
                                 Result.Status.ERROR -> {
+                                    isLoading = false
                                     progressbar.visibility = View.GONE
                                     Toast.makeText(
                                         requireContext(),
@@ -139,6 +180,7 @@ class GuestFragment: Fragment(), Injectable {
                     }
                 }
             } catch (err: Exception) {
+                isLoading = false
                 Toast.makeText(
                     requireContext(),
                     "Error : ${err.message}",
