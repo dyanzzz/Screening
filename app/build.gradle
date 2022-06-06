@@ -130,4 +130,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-runtime:$roomRuntime"
     implementation "androidx.room:room-ktx:$roomRuntime"
+
+    // google maps library ------------------------------------------------------------------------
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 }

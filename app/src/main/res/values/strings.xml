@@ -13,4 +13,5 @@
     <string name="choose_guest">Choose Guest</string>
     <string name="search">Search</string>
     <string name="map">Map</string>
+    <string name="list">List</string>
 </resources>

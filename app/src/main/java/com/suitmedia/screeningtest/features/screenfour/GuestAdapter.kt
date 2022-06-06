@@ -8,6 +8,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.suitmedia.screeningtest.databinding.ItemGuestBinding
 import com.suitmedia.screeningtest.features.screenone.ProfileEntity
+import timber.log.Timber
 
 class GuestAdapter: RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
     private var list = ArrayList<ProfileEntity>()
@@ -33,7 +34,8 @@ class GuestAdapter: RecyclerView.Adapter<GuestAdapter.GuestViewHolder>() {
     inner class GuestViewHolder(private val binding: ItemGuestBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: ProfileEntity) {
 
-            binding.root.setOnClickListener {
+            binding.lytParent.setOnClickListener {
+                Timber.e(data.first_name)
                 guestCallback.onItemClicked(data)
             }
 
