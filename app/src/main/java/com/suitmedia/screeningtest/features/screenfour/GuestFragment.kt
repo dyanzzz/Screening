@@ -18,7 +18,6 @@ import com.suitmedia.screeningtest.databinding.ToolbarBinding
 import com.suitmedia.screeningtest.di.Injectable
 import com.suitmedia.screeningtest.di.injectViewModel
 import com.suitmedia.screeningtest.features.screenone.ProfileEntity
-import com.suitmedia.screeningtest.features.screenthree.EventFragment
 import com.suitmedia.screeningtest.features.screentwo.DashboardFragment.Companion.FULL_NAME
 import com.suitmedia.screeningtest.features.screentwo.DashboardFragment.Companion.RETURN_VALUE
 import com.suitmedia.screeningtest.ui.setToolbar
@@ -84,6 +83,7 @@ class GuestFragment: Fragment(), Injectable {
 
         try {
             adapter.clear()
+            page = 1
             viewModel.setListGuest(page, limit)
         } catch(err: Exception) {
             Toast.makeText(requireContext(), err.message.toString(), Toast.LENGTH_LONG).show()
