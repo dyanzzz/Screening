@@ -11,4 +11,6 @@
     <string name="hallo">Hallo,</string>
     <string name="choose_event">Choose Event</string>
     <string name="choose_guest">Choose Guest</string>
+    <string name="search">Search</string>
+    <string name="map">Map</string>
 </resources>

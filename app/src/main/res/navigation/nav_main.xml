@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_navigation_dashboard_to_navigation_event"
             app:destination="@id/navigation_event" />
+        <action
+            android:id="@+id/action_navigation_dashboard_to_navigation_guest"
+            app:destination="@id/navigation_guest" />
 
     </fragment>
 
@@ -40,5 +43,18 @@
         android:name="com.suitmedia.screeningtest.features.screenthree.EventFragment"
         android:label="@string/choose_event"
         tools:layout="@layout/fragment_event" />
+
+    <fragment
+        android:id="@+id/navigation_guest"
+        android:name="com.suitmedia.screeningtest.features.screenfour.GuestFragment"
+        android:label="@string/choose_guest"
+        tools:layout="@layout/fragment_guest" >
+
+        <argument
+            android:name="profileEntity"
+            android:defaultValue="@null"
+            app:argType="com.suitmedia.screeningtest.features.screenone.ProfileEntity"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

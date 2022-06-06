@@ -1,5 +1,6 @@
 package com.suitmedia.screeningtest.di.component
 
+import com.suitmedia.screeningtest.features.screenfour.GuestFragment
 import com.suitmedia.screeningtest.features.screenone.HomeFragment
 import com.suitmedia.screeningtest.features.screenthree.EventFragment
 import com.suitmedia.screeningtest.features.screentwo.DashboardFragment
@@ -17,4 +18,7 @@ abstract class MainFragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeEventFragment(): EventFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeGuestFragment(): GuestFragment
 }
